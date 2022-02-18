@@ -38,7 +38,6 @@ const setActiveLink = targetEl => {
 
 export const createHeader = () => {
   refs.navList.innerHTML = createHeaderMarkup();
-
   refs.navList.firstElementChild.classList.add("navListActive");
   createHomePage();
   refs.navList.addEventListener("click", e => {
