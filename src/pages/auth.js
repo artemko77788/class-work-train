@@ -1,10 +1,11 @@
+import { getHomeAuthValue } from "../languages/methods.js";
 import { refs } from "../refs/index.js";
 
 const createAuthForm = name => {
   return `<form name ='authForm'>
-     <label >Email
+     <label >${getHomeAuthValue("email")}
        <input type ="email" name="email"></input></label>
-      <label>Password
+      <label>${getHomeAuthValue("password")}
         <input type="password" name="password"></input></label>
       <button type= "submit">${name}</button>
    </form>`;

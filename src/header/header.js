@@ -1,30 +1,36 @@
+import { getHeaderNavigationValue } from "../languages/methods.js";
 import { createAboutPage } from "../pages/about.js";
 import { createAuthPage } from "../pages/auth.js";
 import { createHomePage } from "../pages/home.js";
+import { createSettingsPage } from "../pages/settings.js";
 import { refs } from "../refs/index.js";
 
 const items = [
   {
-    name: "Home",
+    name: "home",
     path: "/home"
   },
   {
-    name: "About",
+    name: "about",
     path: "/about"
   },
   {
-    name: "Sign in",
+    name: "signin",
     path: "/signin"
   },
   {
-    name: "Sign up",
+    name: "signup",
     path: "/signup"
+  },
+  {
+    name: "settings",
+    path: "/settings"
   }
 ];
 
 const createHeaderMarkup = () => {
-  return items.reduce((acc, { name, path }) => {
-    return (acc += `<li class= "navListItem" data-navlink='${path}'>${name}</li>`);
+  return items.reduce((acc, item) => {
+    return (acc += `<li class= "navListItem" data-navlink='${item.path}'>${getHeaderNavigationValue(item.name)}</li>`);
   }, "");
   // items.map(el => `<li class= "navListItem>${el.name}</li>`).join('')
 };
@@ -44,17 +50,31 @@ export const createHeader = () => {
     if (e.target.nodeName !== "LI") return;
 
     setActiveLink(e.target);
-    if (e.target.dataset.navlink === "/home") createHomePage();
-    if (e.target.dataset.navlink === "/about") createAboutPage();
-    if (e.target.dataset.navlink === "/signin")
-      createAuthPage({
-        name: "Sign in",
-        path: "/signin"
-      });
-    if (e.target.dataset.navlink === "/signup")
-      createAuthPage({
-        name: "Sign up",
-        path: "/signup"
-      });
+
+    switch (e.target.dataset.navlink) {
+      case "/about":
+        createAboutPage();
+        break;
+
+      case "/signin":
+        createAuthPage({
+          name: "Sign in",
+          path: "/signin"
+        });
+        break;
+
+      case "/signup":
+        createAuthPage({
+          name: "Sign up",
+          path: "/signup"
+        });
+        break;
+
+      case "/settings":
+        createSettingsPage();
+        break;
+      default:
+        createHomePage();
+    }
   });
 };

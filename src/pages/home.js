@@ -1,3 +1,4 @@
+import { getHomePageValue, getHomePageValueOfCar } from "../languages/methods.js";
 import { refs } from "../refs/index.js";
 
 const cars = [
@@ -38,8 +39,8 @@ export const createMarkup = cars => {
   carList.innerHTML = cars
     .map(
       car => `<li class="carListItem">
-  <p>Name: ${car.name}</p>
-<p>Price: ${car.price}</p>
+  <p>${getHomePageValueOfCar("name")}: ${car.name}</p>
+<p>${getHomePageValueOfCar("price")}: ${car.price}</p>
   </li>`
     )
     .join("");
@@ -54,8 +55,8 @@ const getFilteredList = event => {
 export const createHomePage = () => {
   refs.main.innerHTML = ` 
   <div class= "homepage">
-  <h2>Home page<h2>
-  <label>Filter:
+  <h2>${getHomePageValue("namePage")}<h2>
+  <label>${getHomePageValue("filter")}:
   <input type='text' class= 'carFilter'/>
   </label>
   <ul class ='carList' >
